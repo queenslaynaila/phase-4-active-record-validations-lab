@@ -11,16 +11,15 @@ RSpec.describe Post, type: :model do
     )
     expect(post).to be_valid
   end
-  
+
   describe 'Basic validations' do
     it { is_expected.to validate_presence_of :title }
     it { is_expected.to validate_length_of(:content).is_at_least(250) }
     it { is_expected.to validate_length_of(:summary).is_at_most(250) }
     it { is_expected.to validate_inclusion_of(:category).in_array(['Fiction', 'Non-Fiction']) }
   end
-  
-  describe 'Custom validations: title is clickbait' do
-    it { is_expected.to allow_value("You Won't Believe These True Facts").for(:title) }
+
+  describe 'Custom validations' do
     it { is_expected.not_to allow_value('True Facts').for(:title) }
   end
 end
